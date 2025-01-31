@@ -12,11 +12,17 @@ Hackathon for Good - Red Cross challenge
 Marin can provide you with the working API key, which ends with `...bwUA`.
 
 2. Make sure you have a virtual environment up and running.
-3. Install the required packages with 
+3. Install the required packages from the root directory with
 ```
 pip install -r requirements.txt
 ```
-4. Run the Chatbot with 
+4. Run the Chatbot from the `src` directory with 
 ```
 python -m chatbot.py
 ```
+
+### TODOs
+
+- [ ] Make sure that for every subsequent question, we keep the context from before 
+- [ ] Tweak the prompt to get more relevant answers 
+- [ ] ...
