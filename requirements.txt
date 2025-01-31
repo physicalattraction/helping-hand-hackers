@@ -1,5 +1,1 @@
-transformers[torch]
-torch
-datasets
-openai
 llm
