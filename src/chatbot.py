@@ -8,13 +8,14 @@ from utils import CHATBOT_INPUT_DIR, CHATBOT_MODELS_DIR
 
 
 class ChatBot:
-    def __init__(self, data_folder, model_name='gpt2', model_filename='redcross'):
+    def __init__(self, data_folder, model_name='gpt2', model_filename='redcross',
+                 force_train=False):
         self.data_folder = data_folder
         self.model_name = model_name
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.tokenizer.pad_token = self.tokenizer.eos_token
         self.model_path = os.path.join(CHATBOT_MODELS_DIR, model_filename)
-        if os.path.exists(self.model_path):
+        if os.path.exists(self.model_path) and not force_train:
             self.load_model()
         else:
             self.model = AutoModelForCausalLM.from_pretrained(model_name)
@@ -24,7 +25,7 @@ class ChatBot:
     def load_documents(self):
         documents = ""
         for filename in os.listdir(self.data_folder):
-            if filename.endswith('.csv'):
+            if filename.endswith('chatbot-input.csv'):
                 with open(os.path.join(self.data_folder, filename), 'r') as file:
                     documents += file.read() + "\n"
         return documents
@@ -52,7 +53,7 @@ class ChatBot:
         training_args = TrainingArguments(
             output_dir='./results',
             overwrite_output_dir=True,
-            num_train_epochs=1,
+            num_train_epochs=5,
             per_device_train_batch_size=4,
             save_steps=10_000,
             save_total_limit=2,
@@ -84,7 +85,8 @@ class ChatBot:
 
 # Example usage
 if __name__ == "__main__":
-    chatbot = ChatBot(data_folder=CHATBOT_INPUT_DIR, model_filename='redcross')
+    chatbot = ChatBot(data_folder=CHATBOT_INPUT_DIR, model_filename='redcross',
+                      force_train=True)
     while True:
         question = input("Ask a question: ")
         if question.lower() in ['exit', 'quit']:
