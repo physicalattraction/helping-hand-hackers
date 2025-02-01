@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ```
 4. Run the Chatbot from the `src` directory with 
 ```
-python -m chatbot.py
+python -m openai-chatbot
 ```
 
 ### TODOs
