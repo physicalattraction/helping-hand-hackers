@@ -3,6 +3,7 @@ import os.path
 from functools import cached_property
 
 import llm
+import tiktoken
 
 from utils import CHATBOT_INPUT_DIR
 
@@ -39,8 +40,16 @@ class RedCrossChatbot:
             if not initial_prompt_initialized:
                 user_input = self.initial_prompt + user_input
                 initial_prompt_initialized = True
+            print(f'Number of tokens: {self.count_tokens(user_input)}')
+            raise NotImplementedError()
             response = conversation.prompt(user_input)
             print(response.text())
+            print(response.token_usage())
+
+    def count_tokens(self, text: str) -> int:
+        encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+        num_tokens = len(encoding.encode(text))
+        return num_tokens
 
 
 if __name__ == '__main__':
