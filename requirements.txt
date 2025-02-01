@@ -1,1 +1,3 @@
 llm
+PyQt6
+Pillow
