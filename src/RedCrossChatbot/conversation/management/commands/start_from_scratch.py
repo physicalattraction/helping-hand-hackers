@@ -34,8 +34,8 @@ class Command(BaseCommand):
         # Create a dummy conversation
         convo = Conversation.objects.create(user='Erwin')
         ConversationLine.objects.bulk_create([
-            ConversationLine(conversation=convo, speaker='user', text='Where can I donate blood?'),
-            # ConversationLine(conversation=convo, speaker='user', text
+            ConversationLine(conversation=convo, speaker='user', text='Where can I sleep tonight?'),
+            ConversationLine(conversation=convo, speaker='bot', text='You can potentially stay at the night shelter; more information is available [here](https://helpfulinformation.redcross.nl/den-haag/shelter/night-shelter).'),
         ])
 
         # Run the server

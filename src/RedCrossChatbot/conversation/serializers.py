@@ -10,7 +10,7 @@ class ConversationLineSerializer(serializers.ModelSerializer):
 
 
 class ConversationSerializer(serializers.ModelSerializer):
-    lines = ConversationLineSerializer(many=True, read_only=True, source='lines')
+    lines = ConversationLineSerializer(many=True, read_only=True)
 
     class Meta:
         model = Conversation
