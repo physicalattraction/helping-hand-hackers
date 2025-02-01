@@ -66,14 +66,24 @@ class RedCrossDataHandler:
             raise ValueError(msg) from e
 
     def write_csv_file(self):
-        input_filename = 'subcategories_original.csv'
         output_filename = 'chatbot-input.csv'
-        input_filepath = os.path.join(CHATBOT_INPUT_DIR, input_filename)
         output_filepath = os.path.join(CHATBOT_INPUT_DIR, output_filename)
         result = {
             self.get_url(subcategory_id): self.subcategory_descriptions[subcategory_id]
             for subcategory_id, subcategory_slug in self.subcategories.items()
         }
+
+        offers_filename = "Offers.csv"
+        offers_filepath = os.path.join(CHATBOT_INPUT_DIR, offers_filename)
+        with open(offers_filepath, 'r', encoding='utf-8') as file:
+            dict_reader = csv.DictReader(file)
+            for row in dict_reader:
+                visible = row['VISIBLE'].upper()
+                if visible != 'SHOW':
+                    print('This line is hidden')
+                print(row)
+
+
         # Write the result to a new CSV file
         with open(output_filepath, 'w', newline='', encoding='utf-8') as file:
             fieldnames = ['LINK', 'DESCRIPTION']
@@ -81,8 +91,6 @@ class RedCrossDataHandler:
             writer.writeheader()
             for subcategory_slug, description in result.items():
                 writer.writerow({'LINK': subcategory_slug, 'DESCRIPTION': description})
-
-
 
 if __name__ == '__main__':
     handler = RedCrossDataHandler()
