@@ -31,6 +31,7 @@ class RedCrossChatbot:
         model = llm.get_model('gpt-4o-mini')
         model.key = self.secrets['OPENAI_KEY']
         initial_prompt_initialized = False
+        conversation = model.conversation()
         while True:
             user_input = input('You: ')
             if user_input.lower() in {'exit', 'bye', 'quit'}:
@@ -38,7 +39,7 @@ class RedCrossChatbot:
             if not initial_prompt_initialized:
                 user_input = self.initial_prompt + user_input
                 initial_prompt_initialized = True
-            response = model.prompt(user_input)
+            response = conversation.prompt(user_input)
             print(response.text())
 
 

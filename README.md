@@ -23,6 +23,6 @@ python -m openai-chatbot
 
 ### TODOs
 
-- [ ] Make sure that for every subsequent question, we keep the context from before 
+- [X] Make sure that for every subsequent question, we keep the context from before 
 - [ ] Tweak the prompt to get more relevant answers 
 - [ ] ...
