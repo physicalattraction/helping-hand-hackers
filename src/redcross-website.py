@@ -1,6 +1,7 @@
 import csv
 import os.path
 from functools import cached_property
+import json
 
 from utils import CHATBOT_INPUT_DIR
 
@@ -81,7 +82,22 @@ class RedCrossDataHandler:
                 visible = row['VISIBLE'].upper()
                 if visible != 'SHOW':
                     print('This line is hidden')
-                print(row)
+                    continue
+                
+                try:
+                    subcategory_id = int(row['SUBCATEGORY'])
+                except ValueError:
+                    continue
+                try:
+                    subcategory_link = self.get_url(subcategory_id)
+                except ValueError:
+                    continue
+                offer_slug = row['SLUG']
+                link = f'{subcategory_link}/{offer_slug}'
+                print(link)
+
+                description = f'{row["NAME"]}: {row["DESCRIPTION"].replace("\n", " ")}. Phone: {row["PHONENUMBERS"].replace("\n", ", ") or "unknown"}. Email: {row["EMAILS"] or "unknown"}.'
+                result[link] = description
 
 
         # Write the result to a new CSV file
@@ -94,8 +110,8 @@ class RedCrossDataHandler:
 
 if __name__ == '__main__':
     handler = RedCrossDataHandler()
-    print(handler.categories)
-    print(handler.subcategories)
-    print(handler.subcategory_descriptions)
+    # print(handler.categories)
+    # print(handler.subcategories)
+    # print(handler.subcategory_descriptions)
     handler.write_csv_file()
     print(handler.get_url(7))
