@@ -23,6 +23,10 @@ python -m openai-chatbot
 
 ### TODOs
 
-- [ ] Make sure that for every subsequent question, we keep the context from before 
-- [ ] Tweak the prompt to get more relevant answers 
-- [ ] ...
+- [X] Make sure that for every subsequent question, we keep the context from before 
+- [ ] Tweak the prompt to get more relevant answers
+  - [ ] Make sure it asks more information if it can't answer a question
+  - [ ] Make sure it uses the right language
+- [ ] Use the third level: offers
+- [ ] Build an interface in Windows Form
+- [ ] Build an API around the chatbot in Flask

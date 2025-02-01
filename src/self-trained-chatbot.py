@@ -23,27 +23,28 @@ class ChatBot:
             self.save_model()
 
     def load_documents(self):
-        documents = ""
+        documents = ''
         for filename in os.listdir(self.data_folder):
             if filename.endswith('chatbot-input.csv'):
                 with open(os.path.join(self.data_folder, filename), 'r') as file:
-                    documents += file.read() + "\n"
+                    documents += file.read() + '\n'
         return documents
 
     def train_model(self):
         documents = self.load_documents()
         if not documents.strip():
-            raise ValueError("No documents found in the data folder.")
+            raise ValueError('No documents found in the data folder.')
 
         with open('train.txt', 'w') as f:
             f.write(documents)
 
         dataset = load_dataset('text', data_files='train.txt')
         if len(dataset['train']) == 0:
-            raise ValueError("The dataset is empty. Please ensure 'train.txt' contains data.")
+            raise ValueError('The dataset is empty. Please ensure train.txt contains data.')
 
         tokenized_dataset = dataset.map(
-            lambda e: self.tokenizer(e['text'], truncation=True, padding='max_length', max_length=128), batched=True)
+            lambda e: self.tokenizer(e['text'], truncation=True, padding='max_length', max_length=128),
+            batched=True)
 
         data_collator = DataCollatorForLanguageModeling(
             tokenizer=self.tokenizer,
@@ -84,11 +85,15 @@ class ChatBot:
 
 
 # Example usage
-if __name__ == "__main__":
+if __name__ == '__main__':
+    raise NotImplementedError('This is the old chatbot with our own trained model. '
+                              'We have abandoned this project. '
+                              'Run `python -m openai-chatbot` instead')
+
     chatbot = ChatBot(data_folder=CHATBOT_INPUT_DIR, model_filename='redcross',
-                      force_train=True)
+                      force_train=False)
     while True:
-        question = input("Ask a question: ")
+        question = input('Ask a question: ')
         if question.lower() in ['exit', 'quit']:
             break
         answer = chatbot.answer_question(question)

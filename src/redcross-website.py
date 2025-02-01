@@ -10,6 +10,10 @@ class RedCrossDataHandler:
 
     @cached_property
     def categories(self) -> dict[int, str]:
+        """
+        Return a dictionary from category ID to category slug
+        """
+
         filename = 'categories_original.csv'
         filepath = os.path.join(CHATBOT_INPUT_DIR, filename)
         with open(filepath, 'r') as file:
@@ -20,6 +24,10 @@ class RedCrossDataHandler:
 
     @cached_property
     def subcategories(self) -> dict[int, str]:
+        """
+        Return a dictionary from subcategory ID to <category_slug>/<subcategory_slug>
+        """
+
         filename = 'subcategories_original.csv'
         filepath = os.path.join(CHATBOT_INPUT_DIR, filename)
         result = {}
@@ -38,6 +46,10 @@ class RedCrossDataHandler:
 
     @cached_property
     def subcategory_descriptions(self) -> dict[int, str]:
+        """
+        Return a dictionary from subcategory ID to subcategory description
+        """
+
         filename = 'subcategories_original.csv'
         filepath = os.path.join(CHATBOT_INPUT_DIR, filename)
         with open(filepath, 'r', encoding='utf-8') as file:
@@ -51,7 +63,7 @@ class RedCrossDataHandler:
             return f'{self.REDCROSS_URL}/{self.subcategories[subcategory_id]}'
         except KeyError as e:
             msg = f'Subcategory ID {subcategory_id} is not a visible subcategory.'
-            raise ValueError(msg)
+            raise ValueError(msg) from e
 
     def write_csv_file(self):
         input_filename = 'subcategories_original.csv'
