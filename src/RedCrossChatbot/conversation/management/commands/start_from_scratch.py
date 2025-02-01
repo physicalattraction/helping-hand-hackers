@@ -12,15 +12,6 @@ class Command(BaseCommand):
     help = 'Wipes the database, runs all migrations, and creates a superuser.'
 
     def handle(self, *args, **kwargs):
-        db_path = settings.DATABASES['default']['NAME']
-
-        # Delete the database file
-        if os.path.exists(db_path):
-            os.remove(db_path)
-            self.stdout.write(self.style.SUCCESS('Database wiped successfully.'))
-        else:
-            self.stdout.write(self.style.WARNING('Database file does not exist.'))
-
         # Run migrations
         call_command('migrate')
         self.stdout.write(self.style.SUCCESS('Migrations applied successfully.'))
@@ -28,11 +19,14 @@ class Command(BaseCommand):
         # Create superuser
         username = 'admin'
         email = 'admin@example.com'
-        User.objects.create_superuser(username=username, email=email, password='admin')
-        self.stdout.write(self.style.SUCCESS(f'Superuser created successfully. Username: {username}, Email: {email}'))
+        try:
+            User.objects.create_superuser(username=username, email=email, password='admin')
+            self.stdout.write(self.style.SUCCESS(f'Superuser created successfully. Username: {username}, Email: {email}'))
+        except Exception as e:
+            self.stdout.write(self.style.WARNING(f'Superuser already exists. {e}'))
 
         # Create a dummy conversation
-        convo = Conversation.objects.create(user='Erwin')
+        convo, _ = Conversation.objects.get_or_create(user='Erwin')
         ConversationLine.objects.bulk_create([
             ConversationLine(conversation=convo, speaker='user', text='Where can I sleep tonight?'),
             ConversationLine(conversation=convo, speaker='bot', text='You can potentially stay at the night shelter; more information is available [here](https://helpfulinformation.redcross.nl/den-haag/shelter/night-shelter).'),

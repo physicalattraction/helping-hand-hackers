@@ -1,3 +1,5 @@
-llm
-PyQt6
+Django
 Pillow
+PyQt6
+djangorestframework
+llm
