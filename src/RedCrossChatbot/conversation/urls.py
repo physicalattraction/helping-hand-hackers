@@ -1,7 +1,11 @@
-from django.urls import path
+# src/RedCrossChatbot/conversation/urls.py
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from conversation.views import ConversationViewSet
 
-from conversation.views import get_or_create_conversation
+router = DefaultRouter()
+router.register(r'', ConversationViewSet, basename='conversation')
 
 urlpatterns = [
-    path('', get_or_create_conversation, name='get_or_create_conversation'),
+    path('', include(router.urls)),
 ]
