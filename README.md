@@ -77,3 +77,15 @@ Bot: Ik begrijp dat je honger hebt!  Er zijn verschillende plaatsen in Den Haag 
 Voor meer informatie over voedselhulp, kun je ook kijken naar: (/food-clothing/food) 
 
 Ik hoop dat dit helpt! Laat me weten of je nog andere vragen hebt.
+
+### Gemini in Arabic
+You: أين يمكنني النوم الليلة؟
+
+Bot: أعتذر، لكنني لا أعرف أين يمكنك النوم الليلة.  أنا بحاجة إلى مزيد من المعلومات لفهم حالتك.  هل أنت في لاهاي أم روتردام أم مدينة أخرى؟ هل لديك قرار سلبي بشأن اللجوء؟ هل تفضل مأوى ليلي أم نهاري؟
+
+مع ذلك، إليك بعض الخيارات التي قد تكون مفيدة اعتمادًا على وضعك:
+
+* **إذا كنت في لاهاي وفي حاجة لمأوى ليلي خلال فصل الشتاء:**  يوجد مأوى ليلي شتوي، لكنه مفتوح فقط عندما يكون الطقس شديد البرودة، و يبدأ من 31 يناير.  لست متأكداً من رقم الهاتف أو البريد الإلكتروني.  (shelter/night-shelter/winter-shelter)
+* **إذا كنت في روتردام ولديك قرار سلبي بشأن اللجوء:**  يمكن أن يساعدك مكتب LVV Rotterdam في الحصول على مأوى على مدار 24 ساعة.  رقم الهاتف: 14 010، البريد الإلكتروني: vreemdelingenloketMO@rotterdam.nl.  (shelter/night-shelter/lvv-rotterdam, where-to-go-first/go-first/lvv-rotterdam)
+* **لمأوى ليلي عام:**  لدي معلومات عن بعض المآوي الليلية، ولكنني أحتاج إلى معرفة موقعك الجغرافي لمساعدتك بشكل أفضل.
+أوصي أيضًا بالتواصل مع  خط المساعدة عبر تطبيق WhatsApp التابع للصليب الأحمر (where-to-go-first/go-first/helpline)  للحصول على المساعدة في العثور على المأوى المناسب.  أرجو تزويدي بمزيد من التفاصيل حتى أتمكن من تقديم مساعدة أكثر دقة.
