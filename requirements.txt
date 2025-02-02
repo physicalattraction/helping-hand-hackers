@@ -3,3 +3,5 @@ Pillow
 PyQt6
 djangorestframework
 llm
+requests
+tiktoken
