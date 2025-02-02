@@ -1,16 +1,21 @@
 # helping-hand-hackers
 Hackathon for Good - Red Cross challenge
 
-### Usage notes
+By:
+- [Gabor Kocsi](https://github.com/kocsigabor99)
+- [Marin Chiosa](https://github.com/MarinChiosa246602)
+- [Mate Kovasznai](https://github.com/MateKovasznai241960)
+- [Erwin Rossen](https://github.com/physicalattraction)
+
+## Usage notes
 
 1. In `src`, create a file called secrets.json` with the following content:
 ```json
 {
-  "OPENAI_KEY": "sk-proj-...bwUA"
+  "OPENAI_KEY": "sk-proj-...bwUA",
+  "GEMINI_KEY": "..."
 }
 ```
-Marin can provide you with the working API key, which ends with `...bwUA`.
-
 2. Make sure you have a virtual environment up and running.
 3. Install the required packages from the root directory with
 ```
@@ -18,15 +23,17 @@ pip install -r requirements.txt
 ```
 4. Run the Chatbot from the `src` directory with 
 ```
-python -m openai-chatbot
+python -m redcross-chatbot
 ```
 
-### TODOs
+## Repository structure
 
-- [X] Make sure that for every subsequent question, we keep the context from before 
-- [ ] Tweak the prompt to get more relevant answers
-  - [ ] Make sure it asks more information if it can't answer a question
-  - [ ] Make sure it uses the right language
-- [ ] Use the third level: offers
-- [ ] Build an interface in Windows Form
-- [ ] Build an API around the chatbot in Flask
+Used in final presentation:
+- `src/redcross-chatbot.py`: The main script for the chatbot. Run this module to run the chatbot
+- `src/redcross-website.py`: We used this script to convert the Excel sheet with the Red Cross data to a readable CSV file
+- `data/chatbot-input/chatbot-input.csv`: The result from the script above, used for the prompt
+- `src/utils.py`: Directory structure helpers
+
+Not used in final presentation:
+- `src/RedCrossChatbot`: A Django application that we started to build as an API for an interface we were building. In the end, we didn't use this because of time constraints and issues we faced with tokens
+- `src/self-trained-chatbot.py`: A script we used to train the chatbot on the data from the Red Cross. We didn't use this in the end, because the result out-of-the-box was not good enough, and it would take too much time to train a proper model
