@@ -94,7 +94,7 @@ class RedCrossChatbot:
         response = self.openai_conversation.prompt(prompt_str)
         print(response)
         print(type(response))
-        return response
+        return response.response_json
 
     def _prompt_gemini(self, prompt_str: str) -> str:
         key = self.secrets['GEMINI_KEY']
@@ -122,12 +122,12 @@ class RedCrossChatbot:
 
 
 if __name__ == '__main__':
-    chatbot = RedCrossChatbot(api_to_use='openai')
+    chatbot = RedCrossChatbot(api_to_use='gemini')
     # print(chatbot.count_tokens('Where can I sleep tonight?'))
     # print(chatbot.count_tokens(json.dumps(chatbot.chatbot_input)))
     # print(chatbot.find_most_fitting_category('Where can I sleep tonight?'))
-    print(chatbot.knowledge_based_prompt(
-        ['shelter/day-shelter', 'shelter/night-shelter', 'safety-protection/safety-protection'],
-        'Where can I sleep tonight?')
-    )
-    # chatbot.run()
+    # print(chatbot.knowledge_based_prompt(
+    #     ['shelter/day-shelter', 'shelter/night-shelter', 'safety-protection/safety-protection'],
+    #     'Where can I sleep tonight?')
+    # )
+    chatbot.run()
