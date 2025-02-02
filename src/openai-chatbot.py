@@ -2,14 +2,13 @@ import csv
 import json
 import os.path
 from functools import cached_property
-from pprint import pprint
 
 import llm
 import requests
 import tiktoken
 from llm import Conversation
 
-from utils import CHATBOT_INPUT_DIR
+from utils import CHATBOT_INPUT_DIR, SRC_DIR
 
 
 class RedCrossChatbot:
@@ -17,7 +16,8 @@ class RedCrossChatbot:
 
     @cached_property
     def secrets(self) -> dict[str, object]:
-        with open('secrets.json') as f:
+        path_to_secrets = SRC_DIR / 'secrets.json'
+        with open(path_to_secrets) as f:
             return json.load(f)
 
     @cached_property
@@ -50,7 +50,6 @@ class RedCrossChatbot:
                       f'Each string should be a category only from the following list: {self.categories}. '
                       f'Pick the three that most likely contains information about the following prompt: '
                       f'"{user_input}"')
-        print(prompt_str)
         return self.prompt(prompt_str)
 
     def knowledge_based_prompt(self, categories: list[str], user_input: str) -> str:
@@ -106,9 +105,10 @@ class RedCrossChatbot:
 
 if __name__ == '__main__':
     chatbot = RedCrossChatbot()
+    print(chatbot.count_tokens('Where can I sleep tonight?'))
     # print(chatbot.find_most_fitting_category('Where can I sleep tonight?'))
-    print(chatbot.knowledge_based_prompt(
-        ['shelter/day-shelter', 'shelter/night-shelter', 'safety-protection/safety-protection'],
-        'Where can I sleep tonight?')
-    )
+    # print(chatbot.knowledge_based_prompt(
+    #     ['shelter/day-shelter', 'shelter/night-shelter', 'safety-protection/safety-protection'],
+    #     'Where can I sleep tonight?')
+    # )
     # chatbot.run()
